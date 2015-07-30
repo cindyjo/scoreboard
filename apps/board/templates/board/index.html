@@ -1,0 +1,66 @@
+<html>
+<head>
+	<title>Hogwart Scoreboard</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'board/css/style.css' %}">
+</head>
+<body>
+	<h1>Winner of the House: {{request.session.winner}}</h1>
+	<div id = "gryff">
+		<h3>Gryffindor</h3>
+		<p>Total Score</p>
+		<p>{{request.session.g_point}}</p>
+		<form action="{% url 'process' %}" method="post">
+			{% csrf_token %}
+			<input type="hidden" name="house" value="Gryffindor">
+			<label for ="g_point" >Please enter score</label><br>
+			<input type="text" name="point" id="g_point"><br>
+			<input type="submit" name="submit" value="Submit">
+		</form>
+	</div>	
+	<div id= "huff">
+		<h3>Hufflepuff</h3>
+		<p>Total Score</p>
+		<p>{{request.session.h_point}}</p>
+		<form action="{% url 'process' %}" method="post">
+			{% csrf_token %}
+			<input type="hidden" name="house" value="Hufflepuff">
+			<label for="h_point">Please enter score</label><br>
+			<input type="text" name="point" id="h_point"><br>
+			<input type="submit" name="submit" value="Submit">
+		</form>
+	</div>
+	<div id="raven">
+		<h3>Ravenclaw</h3>
+		<p>Total Score</p>
+		<p>{{request.session.r_point}}</p>
+		<form action="{% url 'process' %}" method="post">
+			{% csrf_token %}
+			<input type="hidden" name="house" value="Ravenclaw">
+			<label for="r_point">Please enter score</label><br>
+			<input type="text" name="point" id="r_point"><br>
+			<input type="submit" name="submit" value="Submit">
+		</form>
+	</div>
+	<div id="slyth">
+		<h3>Slytherin</h3>
+		<p>Total Score</p>
+		<p>{{request.session.s_point}}</p>
+		<form action="{% url 'process' %}" method="post">
+			{% csrf_token %}
+			<input type="hidden" name="house" value="Slytherin">
+			<label for="s_point">Please enter score</label><br>
+			<input type="text" name="point" id="s_point"><br>
+			<input type="submit" name="submit" value="Submit">
+		</form>
+	</div>
+	<div id="record">
+		<p>Score records:</p>
+		<div id="rec_border">
+		{% for record in request.session.record %}
+			<p>{{record}}</P>
+		{% endfor %}
+		</div>
+	</div>
+</body>
+</html>
